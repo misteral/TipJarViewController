@@ -61,7 +61,7 @@ final class TipJarTableViewCell: UITableViewCell {
         tipJarButton.trailingAnchor ~~ margins.trailingAnchor
         tipJarButton.bottomAnchor ≤≤ margins.bottomAnchor
         
-        tipJarButton.widthAnchor ~~ 70
+        tipJarButton.widthAnchor ~~ 80
         
         updateConstraintsIfNeeded()
     }

@@ -45,12 +45,13 @@ final class TipJarButton: UIButton {
     }
     
     func setAmount(amount: String, frequency: TipJarFrequency) {
+        
         let string = NSMutableAttributedString()
         string.append(NSAttributedString(string: amount + "\n", attributes: [
-            .font: UIFont.systemFont(ofSize: 16, weight: .medium)
+            .font: UIFont.systemFont(ofSize: 11, weight: .medium)
             ]))
         string.append(NSAttributedString(string: frequency.description, attributes: [
-            .font: UIFont.systemFont(ofSize: 13, weight: .regular)
+            .font: UIFont.systemFont(ofSize: 10, weight: .regular)
             ]))
         
         let paragraphStyle = NSMutableParagraphStyle()
@@ -69,6 +70,13 @@ final class TipJarButton: UIButton {
         let disabledString = NSMutableAttributedString(attributedString: string)
         disabledString.addAttribute(.foregroundColor, value: disabledColor)
         setAttributedTitle(disabledString, for: .disabled)
+        
+//        print("Text: \(self.titleLabel?.text)")
+        
+//        self.titleLabel?.minimumScaleFactor = 0.25
+//        self.titleLabel?.numberOfLines = 2
+//        self.titleLabel?.adjustsFontSizeToFitWidth = true
+//        self.sizeToFit()
     }
     
     required init?(coder aDecoder: NSCoder) {

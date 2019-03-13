@@ -372,6 +372,7 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
                 let formatter = NumberFormatter()
                 formatter.numberStyle = .currency
                 formatter.locale = product.priceLocale
+                print("Price locale: \(product.priceLocale), locale current: \(Locale.current)")
                 formatter.maximumFractionDigits = 2
                 return formatter
             }()
