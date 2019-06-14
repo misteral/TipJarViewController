@@ -48,7 +48,7 @@ final class TipJarButton: UIButton {
         
         let string = NSMutableAttributedString()
         string.append(NSAttributedString(string: amount + "\n", attributes: [
-            .font: UIFont.systemFont(ofSize: 11, weight: .medium)
+            .font: UIFont.systemFont(ofSize: 12, weight: .medium)
             ]))
         string.append(NSAttributedString(string: frequency.description, attributes: [
             .font: UIFont.systemFont(ofSize: 10, weight: .regular)
