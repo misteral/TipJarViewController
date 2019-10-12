@@ -31,18 +31,18 @@ If you've been enjoying this app and would like to show your support, please con
     
     static func subscriptionProductIdentifier(for row: SubscriptionRow) -> String {
         switch row {
-        case .monthly: return "com.lionheartsw.Pushpin.TipJarSubscription.Monthly"
-        case .yearly: return "com.lionheartsw.Pushpin.TipJarSubscription.Yearly"
+        case .monthly: return "co.itbeaver.TipJarTestApp.Subscription.Monthly"
+        case .yearly: return "co.itbeaver.TipJarTestApp.Subscription.Yearly"
         }
     }
     
     static func oneTimeProductIdentifier(for row: OneTimeRow) -> String {
         switch row {
-        case .small: return "com.lionheartsw.Pushpin.Tip.Small"
-        case .medium: return "com.lionheartsw.Pushpin.Tip.Medium"
-        case .large: return "com.lionheartsw.Pushpin.Tip.Large"
-        case .huge: return "com.lionheartsw.Pushpin.Tip.Huge"
-        case .massive: return "com.lionheartsw.Pushpin.Tip.Massive"
+        case .small: return "co.itbeaver.TipJarTestApp.Tip.Small"
+        case .medium: return "co.itbeaver.TipJarTestApp.Tip.Medium"
+        case .large: return "co.itbeaver.TipJarTestApp.Tip.Large"
+        case .huge: return "co.itbeaver.TipJarTestApp.Tip.Huge"
+        case .massive: return "co.itbeaver.TipJarTestApp.Tip.Massive"
         }
     }
     

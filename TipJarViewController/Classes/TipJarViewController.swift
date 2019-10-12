@@ -14,7 +14,7 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
     var purchased = false
     var products: [String: SKProduct]?
     var sectionContainer: Section.Container {
-        return Section.Container(productsLoaded: products != nil, hasProducts: (products ?? [:]).count > 0, purchased: purchased)
+        return Section.Container(productsLoaded: products != nil, hasProducts: (products ?? [:]).count > 0, purchased: purchased, back: true)
     }
     
     @objc public init() {
@@ -30,6 +30,7 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
             var productsLoaded: Bool
             var hasProducts: Bool
             var purchased: Bool
+            var back: Bool
         }
         
         case top
@@ -40,6 +41,7 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
         case thankYou
         case manageSubscription
         case legal
+        case back
         
         static func conditionalSections(for container: TipJarViewController.Section.Container) -> [(TipJarViewController.Section, Bool)] {
             return [
@@ -49,7 +51,8 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
                 (.oneTime, container.productsLoaded && container.hasProducts && !container.purchased),
                 (.loading, !container.productsLoaded),
                 (.thankYou, container.purchased),
-                (.manageSubscription, container.purchased)
+                (.manageSubscription, container.purchased),
+                (.back, container.back)
             ]
         }
     }
@@ -209,6 +212,10 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
         
         var iapRow: IAPRow?
         switch Section(at: indexPath, container: sectionContainer) {
+        case .back:
+            print("Back pressed")
+            dismiss(animated: true, completion: nil)
+            
         case .legal:
             let legalRow = LegalRow(at: indexPath)
             guard let url = legalRow.url else {
@@ -260,6 +267,7 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
         case .oneTime: return OneTimeRow.count
         case .thankYou: return 1
         case .manageSubscription: return 1
+        case .back: return 1
         }
     }
     
@@ -273,6 +281,7 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
         case .oneTime: return OneTimeRow.title
         case .thankYou: return nil
         case .manageSubscription: return nil
+        case .back: return nil
         }
     }
     
@@ -294,6 +303,7 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
             """
         case .thankYou: return nil
         case .manageSubscription: return nil
+        case .back: return nil
         }
     }
     
@@ -341,6 +351,13 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
             
         case .oneTime:
             row = OneTimeRow(at: indexPath)
+            
+        case .back:
+            let cell = tableView.dequeueReusableCell(for: indexPath) as QuickTableViewCellValue1
+            cell.textLabel?.text = "Back"
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.textColor = TipJarButton.blue
+            return cell
         }
         
         let cell = tableView.dequeueReusableCell(for: indexPath) as TipJarTableViewCell
@@ -372,6 +389,7 @@ open class TipJarViewController<T>: BaseTableViewController, UITableViewDelegate
                 let formatter = NumberFormatter()
                 formatter.numberStyle = .currency
                 formatter.locale = product.priceLocale
+//                print("Price locale: \(product.priceLocale), locale current: \(Locale.current)")
                 formatter.maximumFractionDigits = 2
                 return formatter
             }()
